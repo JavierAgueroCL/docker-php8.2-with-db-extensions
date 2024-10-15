@@ -58,6 +58,11 @@ COPY ./php/openssl.cnf /etc/ssl/openssl.cnf
 RUN docker-php-ext-install pdo_mysql zip exif pcntl mysqli
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
+RUN docker-php-ext-install curl
+RUN apt-get -y update \
+    && apt-get install -y libicu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl
 
 #MongoDB Extension Install
 RUN pecl install mongodb \
