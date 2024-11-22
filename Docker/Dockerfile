@@ -58,7 +58,6 @@ COPY ./php/openssl.cnf /etc/ssl/openssl.cnf
 RUN docker-php-ext-install pdo_mysql zip exif pcntl mysqli
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd
-RUN docker-php-ext-install curl
 RUN apt-get -y update \
     && apt-get install -y libicu-dev \
     && docker-php-ext-configure intl \
@@ -67,6 +66,13 @@ RUN apt-get -y update \
 #MongoDB Extension Install
 RUN pecl install mongodb \
     &&  echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongo.ini 
+
+#Xdebug
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+RUN mkdir -p docker/php/conf.d
+COPY ./php/xdebug.ini /docker/php/conf.d/xdebug.ini
+RUN touch docker/php/conf.d/error_reporting.ini
 
 # Install composer 1
 # RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \ && composer self-update --1
