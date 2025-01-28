@@ -37,6 +37,8 @@ RUN apt-get install -y mssql-tools
 RUN apt-get install -y libgssapi-krb5-2
 RUN apt-get -y --no-install-recommends install unixodbc-dev 
 RUN apt-get install -y nano
+RUN apt-get install -y libssl-dev pkg-config
+
 #  End Optionals
 RUN pecl install sqlsrv 
 RUN pecl install pdo_sqlsrv 
@@ -56,8 +58,9 @@ COPY ./php/openssl.cnf /etc/ssl/openssl.cnf
 # Install extensions
 # RUN docker-php-ext-install mysql
 RUN docker-php-ext-install pdo_mysql zip exif pcntl mysqli
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN apt-get update && apt-get install -y libwebp-dev
 RUN docker-php-ext-install gd
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN apt-get -y update \
     && apt-get install -y libicu-dev \
     && docker-php-ext-configure intl \
