@@ -110,6 +110,9 @@ RUN apt-get install -y subversion
 RUN curl -LsS https://phar.phpunit.de/phpunit-10.phar > /usr/local/bin/phpunit \
     && chmod +x /usr/local/bin/phpunit
 
+# Install mysqladmin
+RUN apt-get install -y mysql-client
+
 # Add user for laravel application
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www

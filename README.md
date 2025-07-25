@@ -3,7 +3,7 @@
 ## Introduction
 Docker Compose with Nginx, PHP 8.2
 Supported DB Extensions: MySQL, MongoDB, SQL Server (MSSQL)
-Additional Extensions: GD, Intl, PCNTL, Zip, Exif, WebP, Xdebug, Composer, Soap, WP-CLI
+Additional Extensions: GD, Intl, PCNTL, Zip, Exif, WebP, Xdebug, Composer, Soap, WP-CLI, PHPUnit, MySQLAdmin
 
 ## Building from source
 To build from source you need to clone the git repo and run docker build:
