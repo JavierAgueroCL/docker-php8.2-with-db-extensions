@@ -111,7 +111,7 @@ RUN curl -LsS https://phar.phpunit.de/phpunit-10.phar > /usr/local/bin/phpunit \
     && chmod +x /usr/local/bin/phpunit
 
 # Install mysqladmin
-RUN apt-get install -y mysql-client
+RUN apt-get install -y default-mysql-client
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
