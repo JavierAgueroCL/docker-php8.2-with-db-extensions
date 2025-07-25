@@ -25,6 +25,9 @@ RUN apt-get update && apt-get install -y \
     git \
     curl gnupg gnupg2 gnupg1
 
+# Install apt utils
+RUN apt-get install -y apt-utils
+
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -99,6 +102,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
+
+# Install SVN
+RUN apt-get install -y subversion
+
+# Install phpunit
+RUN curl -LsS https://phar.phpunit.de/phpunit-10.phar > /usr/local/bin/phpunit \
+    && chmod +x /usr/local/bin/phpunit
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
