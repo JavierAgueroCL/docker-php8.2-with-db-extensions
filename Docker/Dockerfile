@@ -95,6 +95,11 @@ RUN touch docker/php/conf.d/error_reporting.ini
 # Install composer 2
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
+# Install WP-CLI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
+
 # Add user for laravel application
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
