@@ -82,7 +82,7 @@ RUN docker-php-ext-install soap
 
 
 #MongoDB Extension Install
-RUN pecl install mongodb \
+RUN pecl install mongodb-1.21.0 \
     &&  echo "extension=mongodb.so" > $PHP_INI_DIR/conf.d/mongo.ini 
 
 #Xdebug
