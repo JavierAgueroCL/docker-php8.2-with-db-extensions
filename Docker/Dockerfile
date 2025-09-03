@@ -75,6 +75,16 @@ RUN apt-get -y update \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl
 
+#Install ext-http
+RUN apt-get update && \
+    apt-get install -y libcurl4-openssl-dev libevent-dev
+RUN docker-php-ext-install curl
+RUN pecl install raphf && docker-php-ext-enable raphf
+RUN pecl install pecl_http && docker-php-ext-enable http
+
+#Install ext-bcmath
+RUN docker-php-ext-install bcmath
+
 #Soap Extension
 RUN apt-get update && \
     apt-get install -y libxml2-dev
